@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "C:\\Users\\97404\\anaconda3\\envs\\vote\\python.exe",
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django"
+   ],
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>老师</title>
+    <style>
+        /* 此处略去了层叠样式表的选择器 */
+    </style>
+</head>
+
+<body>
+    <h1>{{ subject.name }}学科老师信息</h1>
+    <hr>
+    {% if teachers %}
+    {% for teacher in teachers %}
+    <div>
+        <div>
+            <img src="{% static teacher.photo %}" alt="">
+        </div>
+        <div>
+            <h3>{{ teacher.name }}</h3>
+            <p>{{ teacher.detail }}</p>
+            <p class="comment">
+                <a href="/praise/?tno={{ teacher.no }}">好评</a>
+                (<span>{{ teacher.good_count }}</span>)
+                <a href="/criticize/?tno={{teacher.no}}">差评</a>
+                (<span>{{ teacher.bad_count }}</span>)
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h3>暂时没有该学科的老师信息</h3>
+    {% endif %}
+    <p>
+        <a href="/">返回首页</a>
+    </p>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(() => {
+            $('.comment>a').on('click', (evt) => {
+                evt.preventDefault()
+                let anchor = $(evt.target)
+                let url = anchor.attr('href')
+                $.getJSON(url, (json) => {
+                    if (json.code == 10001) {
+                        let span = anchor.next()
+                        span.text(parseInt(span.text()) + 1)
+                    }else{
+                        alert(json.hint)
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

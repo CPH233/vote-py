@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>所有学科信息</title>
+    <style>
+        /* 此处略去了层叠样式表的选择器 */
+    </style>
+</head>
+
+<body>
+    <h1>所有学科</h1>
+    <hr>
+    {% for subject in subjects %}
+    <div>
+        <h3>
+            <a href="/teachers/?sno={{ subject.no }}">{{ subject.name }}</a>
+            {% if subject.is_hot %}
+            <img src="/static/images/hot.png" width="32" alt="">
+            {% endif %}
+        </h3>
+        <p>{{ subject.intro }}</p>
+    </div>
+    {% endfor %}
+</body>
+
+</html>
