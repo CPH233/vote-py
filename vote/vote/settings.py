@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'voteapp',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +49,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+DEBUG_TOOLBAR_CONFIG = {
+    # 引入jQuery库
+    'JQUERY_URL': 'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js',
+    # 工具栏是否折叠
+    'SHOW_COLLAPSED': True,
+    # 是否显示工具栏
+    'SHOW_TOOLBAR_CALLBACK': lambda x: True,
+}
 
 ROOT_URLCONF = 'vote.urls'
 

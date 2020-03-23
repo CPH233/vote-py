@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
+from django.urls import path, include
+from django.conf import settings
 from voteapp import views
 
 urlpatterns = [
@@ -24,4 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('praise/', views.prise_or_criticize),
     path("criticize/", views.prise_or_criticize),
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('captcha/', views.get_captcha),
 ]
+if settings.DEBUG:
+
+    import debug_toolbar
+
+    urlpatterns.insert(0, path('__debug__/', include(debug_toolbar.urls)))
